@@ -17,3 +17,7 @@ Route::get('/', function()
     $view = View::make('route')->with('name', 'Steve');
     return $view;
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
