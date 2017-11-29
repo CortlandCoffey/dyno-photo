@@ -12,10 +12,33 @@
 */
 
 
-Route::get('/', function()
-{
-    $view = View::make('route')->with('name', 'Steve');
-    return $view;
+Route::get('/', function () {
+    $links = \App\Link::all();
+
+    return view('welcome', ['links' => $links]);
+});
+
+Route::get('/preview', function () {
+    return view('preview');
+});
+
+Route::get('/submit', function () {
+    return view('submit');
+});
+
+use Illuminate\Http\Request;
+use App\Jobs\GeneratePreview;
+
+Route::post('/submit', function (Request $request) {
+    $data = $request->validate([
+        'title' => 'required|max:255',
+        'url' => 'required|url|max:255',
+        'description' => 'required|max:255',
+    ]);
+
+    $link = tap(new App\Link($data))->save();
+    
+    return redirect('/');
 });
 
 Auth::routes();
