@@ -18,20 +18,6 @@
                         <span class="help-block">{{ $errors->first('title') }}</span>
                     @endif
                 </div>
-                <div class="form-group{{ $errors->has('url') ? ' has-error' : '' }}">
-                    <label for="url">Url</label>
-                    <input type="text" class="form-control" id="url" name="url" placeholder="URL" value="{{ old('url') }}">
-                    @if($errors->has('url'))
-                        <span class="help-block">{{ $errors->first('url') }}</span>
-                    @endif
-                </div>
-                <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
-                    <label for="description">Description</label>
-                    <textarea class="form-control" id="description" name="description" placeholder="description">{{ old('description') }}</textarea>
-                    @if($errors->has('description'))
-                        <span class="help-block">{{ $errors->first('description') }}</span>
-                    @endif
-                </div>
                 <button type="submit" class="btn btn-default">Submit</button>
             </form>
         </div>

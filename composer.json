@@ -7,7 +7,7 @@
     "require": {
         "php": ">=7.0.0",
         "fideloper/proxy": "~3.3",
-        "jonnyw/php-phantomjs": "^4.6",
+        "jonnyw/php-phantomjs": "4.*",
         "laravel/framework": "5.5.*",
         "laravel/tinker": "~1.0"
     },
@@ -53,5 +53,13 @@
         "preferred-install": "dist",
         "sort-packages": true,
         "optimize-autoloader": true
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "PhantomInstaller\\Installer::installPhantomJS"
+        ],
+        "post-update-cmd": [
+            "PhantomInstaller\\Installer::installPhantomJS"
+        ]
     }
 }

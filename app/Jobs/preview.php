@@ -1,10 +1,8 @@
 <?php
 
-// App\Jobs\GeneratePreview.php
-
 namespace App\Jobs;
 
-use App\Route;
+use App\Share;
 use JonnyW\PhantomJs\Client;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
@@ -12,20 +10,20 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 
-class GeneratePreview implements ShouldQueue
+class preview implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    protected $route;
+    protected $share;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct(Route $route)
+    public function __construct(Share $share)
     {
-        $this->route = $route;
+        $this->share = $share;
     }
 
     /**
@@ -50,12 +48,12 @@ class GeneratePreview implements ShouldQueue
         $left = 0;
 
         // Set the url to the page we want to capture
-        $route = url("route/" . $this->route->id . "/preview");
+        $share = url("http://cortland.me");
 
         // Set the path for the image we want to save
-        $file = base_path('public/images/routes/' . $this->route->id . '.jpeg');
+        $file = base_path('public/images/share-images/' . $this->share->id . '.jpeg');
 
-        $request = $client->getMessageFactory()->createCaptureRequest($route, 'GET');
+        $request = $client->getMessageFactory()->createCaptureRequest($share, 'GET');
         $request->setOutputFile($file);
         $request->setViewportSize($width, $height);
         $request->setCaptureDimensions($width, $height, $top, $left);

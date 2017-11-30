@@ -18,26 +18,20 @@ Route::get('/', function () {
     return view('welcome', ['links' => $links]);
 });
 
-Route::get('/preview', function () {
-    return view('preview');
-});
-
 Route::get('/submit', function () {
     return view('submit');
 });
 
 use Illuminate\Http\Request;
-use App\Jobs\GeneratePreview;
+use App\Jobs\preview;
 
 Route::post('/submit', function (Request $request) {
     $data = $request->validate([
         'title' => 'required|max:255',
-        'url' => 'required|url|max:255',
-        'description' => 'required|max:255',
     ]);
 
-    $link = tap(new App\Link($data))->save();
-    
+    $share = tap(new App\Share($data))->save();
+    dispatch(new preview($share));
     return redirect('/');
 });
 
