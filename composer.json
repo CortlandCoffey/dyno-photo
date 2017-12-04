@@ -47,19 +47,17 @@
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover"
-        ]
-    },
-    "config": {
-        "preferred-install": "dist",
-        "sort-packages": true,
-        "optimize-autoloader": true
-    },
-    "scripts": {
+        ],
         "post-install-cmd": [
             "PhantomInstaller\\Installer::installPhantomJS"
         ],
         "post-update-cmd": [
             "PhantomInstaller\\Installer::installPhantomJS"
         ]
+    },
+    "config": {
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "optimize-autoloader": true
     }
 }
